@@ -20,32 +20,21 @@ class AudioTrackWidget extends StatelessWidget {
         title: setTitle(audioPlayerModel.audio.metas.title.toString()),
         subtitle: setSubtitle(audioPlayerModel.audio.metas.artist.toString()),
         leading: setLeading(audioPlayerModel.audio.metas.image!.path),
-        trailing: IconButton(
-          onPressed: () {
+        trailing: InkWell(
+          onTap: () {
             if (audioPlayerModel.isPlaying) {
-              BlocProvider.of<AudioPlayerBloc>(context)
-                  .add(PressedPauseAudio(audioPlayerModel));
+              context
+                  .read<AudioPlayerBloc>()
+                  .add(PressedPlayAudio(audioPlayerModel));
             } else {
-              BlocProvider.of<AudioPlayerBloc>(context)
+              context
+                  .read<AudioPlayerBloc>()
                   .add(PressedPlayAudio(audioPlayerModel));
             }
           },
-          icon: setIcon(audioPlayerModel.isPlaying),
+          child: setIcon(audioPlayerModel.isPlaying),
         ),
       ),
     );
   }
-
-  //  if (audioPlayerModel.isPlaying) {
-  //            return (){
-  //             //  context
-  //             //     .read<AudioPlayerBloc>()
-  //             //     .add(PressedPauseAudio(audioPlayerModel));
-  //            }
-  //           } else {
-  //             context
-  //                 .read<AudioPlayerBloc>()
-  //                 .add(PressedPlayAudio(audioPlayerModel));
-  //           }
-
 }

@@ -35,21 +35,23 @@ class PlayerWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            color: Colors.grey.shade200,
+            color: Colors.grey.shade700,
             child: ListTile(
               leading: setLeading(model.audio.metas.image!.path),
               title: setTitle(model.audio.metas.title.toString()),
               subtitle: setSubtitle(model.audio.metas.artist.toString()),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-              trailing: IconButton(
-                icon: setIcon(model.isPlaying),
-                onPressed: () {
+              trailing: InkWell(
+                child: setIcon(model.isPlaying),
+                onTap: () {
                   if (model.isPlaying) {
-                    BlocProvider.of<AudioPlayerBloc>(context)
-                        .add(PressedPauseAudio(model));
+                    context
+                        .read<AudioPlayerBloc>()
+                        .add(PressedPlayAudio(model));
                   } else {
-                    BlocProvider.of<AudioPlayerBloc>(context)
+                    context
+                        .read<AudioPlayerBloc>()
                         .add(PressedPlayAudio(model));
                   }
                 },
