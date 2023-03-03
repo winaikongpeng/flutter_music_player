@@ -46,12 +46,10 @@ class PlayerWidget extends StatelessWidget {
                 icon: setIcon(model.isPlaying),
                 onPressed: () {
                   if (model.isPlaying) {
-                    context
-                        .read<AudioPlayerBloc>()
+                    BlocProvider.of<AudioPlayerBloc>(context)
                         .add(PressedPauseAudio(model));
                   } else {
-                    context
-                        .read<AudioPlayerBloc>()
+                    BlocProvider.of<AudioPlayerBloc>(context)
                         .add(PressedPlayAudio(model));
                   }
                 },

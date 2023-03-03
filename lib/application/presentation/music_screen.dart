@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_music_player/application/bloc/audio_player_bloc.dart';
 import 'package:flutter_music_player/application/bloc/audio_player_state.dart';
 import 'package:flutter_music_player/core/widgets/custom_widgets.dart';
-
 import 'widgets/audio_track_widget.dart';
 import 'widgets/player_widget.dart';
 
@@ -76,11 +75,14 @@ class MusicScreen extends StatelessWidget {
   }
 
   Widget buildReadyTrackList(AudioPlayerReady state) {
-    return ListView.builder(
-      itemCount: state.listAudios.length,
-      itemBuilder: (BuildContext context, int index) {
-        return AudioTrackWidget(audioPlayerModel: state.listAudios[index]);
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+        itemCount: state.listAudios.length,
+        itemBuilder: (BuildContext context, int index) {
+          return AudioTrackWidget(audioPlayerModel: state.listAudios[index]);
+        },
+      ),
     );
   }
 
@@ -91,13 +93,16 @@ class MusicScreen extends StatelessWidget {
       children: <Widget>[
         Container(
           alignment: Alignment.topCenter,
-          child: ListView.builder(
-            // padding: const EdgeInsets.only(bottom: 100),
-            itemCount: state.listAudios.length,
-            itemBuilder: (BuildContext context, int index) {
-              return AudioTrackWidget(
-                  audioPlayerModel: state.listAudios[index]);
-            },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              // padding: const EdgeInsets.only(bottom: 100),
+              itemCount: state.listAudios.length,
+              itemBuilder: (BuildContext context, int index) {
+                return AudioTrackWidget(
+                    audioPlayerModel: state.listAudios[index]);
+              },
+            ),
           ),
         ),
         Container(
@@ -115,13 +120,16 @@ class MusicScreen extends StatelessWidget {
       children: <Widget>[
         Container(
           alignment: Alignment.topCenter,
-          child: ListView.builder(
-            // padding:const  EdgeInsets.only(bottom: 100),
-            itemCount: state.listAudios.length,
-            itemBuilder: (BuildContext context, int index) {
-              return AudioTrackWidget(
-                  audioPlayerModel: state.listAudios[index]);
-            },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              // padding:const  EdgeInsets.only(bottom: 100),
+              itemCount: state.listAudios.length,
+              itemBuilder: (BuildContext context, int index) {
+                return AudioTrackWidget(
+                    audioPlayerModel: state.listAudios[index]);
+              },
+            ),
           ),
         ),
         Container(

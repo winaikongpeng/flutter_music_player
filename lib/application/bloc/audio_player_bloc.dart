@@ -25,8 +25,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   void _onAudioEvent(
       AudioPlayerEvent event, Emitter<AudioPlayerState> emit) async {
     if (event is InitialAudio) {
-      final audioList = await audioPlayerRepository.getAll();
-      emit(AudioPlayerReady(audioList));
+      _initState(emit, event);
     }
     if (event is AudioPlayed) {
       _mapAudioPlayedToState(event, emit);
@@ -43,6 +42,11 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     if (event is PressedPauseAudio) {
       _mapPressedPauseAudio(event, emit);
     }
+  }
+
+  void _initState(Emitter<AudioPlayerState> emit, InitialAudio event) async {
+    final audioList = await audioPlayerRepository.getAll();
+    return emit(AudioPlayerReady(audioList));
   }
 
   @override
@@ -79,7 +83,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
     final AudioPlayerModel currentlyPlaying = updatedList
         .firstWhere((model) => model.audio.metas.id == event.audioModelMetaId);
-    emit(AudioPlayerPlaying(currentlyPlaying, updatedList));
+    return emit(AudioPlayerPlaying(currentlyPlaying, updatedList));
   }
 
   void _mapAudioPausedToState(
@@ -97,7 +101,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     await audioPlayerRepository.updateAllModels(updatedList);
     final AudioPlayerModel currentlyPaused = currentList
         .firstWhere((model) => model.audio.metas.id == event.audioModelMetaId);
-    emit(AudioPlayerPaused(currentlyPaused, updatedList));
+    return emit(AudioPlayerPaused(currentlyPaused, updatedList));
   }
 
   void _mapAudioStoppedToState(
@@ -113,8 +117,9 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
             : audioModel)
         .toList();
 
-    emit(AudioPlayerReady(updatedList));
     audioPlayerRepository.updateAllModels(updatedList);
+
+    return emit(AudioPlayerReady(updatedList));
   }
 
   void _mapPressedPlayAudio(
@@ -128,7 +133,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
           event.audioPlayerModel.copyWith(isPlaying: true);
       final updatedList = await audioPlayerRepository.updateModel(updatedModel);
       await assetsAudioPlayer.open(updatedModel.audio, showNotification: true);
-      emit(AudioPlayerPlaying(updatedModel, updatedList));
+      return emit(AudioPlayerPlaying(updatedModel, updatedList));
     }
     //condition 2
     if (state is AudioPlayerPaused) {
@@ -140,7 +145,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
         final updatedList =
             await audioPlayerRepository.updateModel(updatedModel);
         await assetsAudioPlayer.play();
-        emit(AudioPlayerPlaying(updatedModel, updatedList));
+        return emit(AudioPlayerPlaying(updatedModel, updatedList));
       } else {
         final AudioPlayerModel updatedModel =
             event.audioPlayerModel.copyWith(isPlaying: true);
@@ -152,7 +157,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
             respectSilentMode: true,
             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug);
 
-        emit(AudioPlayerPlaying(updatedModel, updatedList));
+        return emit(AudioPlayerPlaying(updatedModel, updatedList));
       }
     }
     //condition 3
@@ -164,7 +169,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
       await assetsAudioPlayer.open(updatedModel.audio, showNotification: true);
 
-      emit(AudioPlayerPlaying(updatedModel, updatedList));
+      return emit(AudioPlayerPlaying(updatedModel, updatedList));
     }
   }
 
@@ -178,6 +183,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     final updatedList = await audioPlayerRepository.updateModel(updatedModel);
 
     await assetsAudioPlayer.pause();
-    emit(AudioPlayerPaused(updatedModel, updatedList));
+    return emit(AudioPlayerPaused(updatedModel, updatedList));
   }
 }

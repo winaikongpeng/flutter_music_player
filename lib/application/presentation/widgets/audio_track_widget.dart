@@ -23,12 +23,10 @@ class AudioTrackWidget extends StatelessWidget {
         trailing: IconButton(
           onPressed: () {
             if (audioPlayerModel.isPlaying) {
-              context
-                  .read<AudioPlayerBloc>()
+              BlocProvider.of<AudioPlayerBloc>(context)
                   .add(PressedPauseAudio(audioPlayerModel));
             } else {
-              context
-                  .read<AudioPlayerBloc>()
+              BlocProvider.of<AudioPlayerBloc>(context)
                   .add(PressedPlayAudio(audioPlayerModel));
             }
           },
@@ -37,4 +35,17 @@ class AudioTrackWidget extends StatelessWidget {
       ),
     );
   }
+
+  //  if (audioPlayerModel.isPlaying) {
+  //            return (){
+  //             //  context
+  //             //     .read<AudioPlayerBloc>()
+  //             //     .add(PressedPauseAudio(audioPlayerModel));
+  //            }
+  //           } else {
+  //             context
+  //                 .read<AudioPlayerBloc>()
+  //                 .add(PressedPlayAudio(audioPlayerModel));
+  //           }
+
 }
