@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'application/presentation/music_player_screen.dart';
+import 'application/presentation/music_screen.dart';
 import 'core/const/colors.dart';
-import 'core/widgets/app_bar.dart';
+import 'core/widgets/custom_app_bar.dart';
 
 void main() {
   runApp(const App());
@@ -34,7 +34,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgDarkColor,
       appBar: customAppBar(),
-      body: const MusicPlayerScreen(),
+      body: const MusicScreen(),
     );
   }
 }

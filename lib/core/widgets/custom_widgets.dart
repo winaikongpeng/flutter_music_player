@@ -41,3 +41,23 @@ Widget setTitle(String text) => Text(
       text,
       style: customTextStyle(fontSize: 15, fontWeight: FontWeight.bold),
     );
+
+Widget loadingWidget() {
+  return const Center(
+    child: CircularProgressIndicator(
+      color: Colors.grey,
+      strokeWidth: 5,
+    ),
+  );
+}
+
+Widget errorText(String msg) => Center(
+      child: Text(
+        msg,
+        style: customTextStyle(
+          fontSize: 20,
+          color: Colors.red,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+    );
