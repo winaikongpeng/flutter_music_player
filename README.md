@@ -10,4 +10,5 @@
 ## Note:
 - music and image file must be assets folder/audios,images
 - this project never run on ios platform
-- if you run ios plaese check pod and permission [assets_audio_players](https://pub.dev/packages/assets_audio_player)
+- if you run on iOS plaese check pod and permission [assets_audio_players](https://pub.dev/packages/assets_audio_player)
+- support on iOS and Android only > [support](https://pub.dev/packages/assets_audio_player)
