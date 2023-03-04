@@ -1,7 +1,6 @@
 # flutter_music_player
-## overview
-
-![Screenshot 2023-03-04 213408](https://user-images.githubusercontent.com/62875771/222914306-79398065-194b-4d3b-8977-3c8140c9bf9d.png)
+## Overview
+![Screenshot 2023-03-04 213309](https://user-images.githubusercontent.com/62875771/222914445-6a8ee591-1077-40e8-90c3-d3628c529316.png)  ![Screenshot 2023-03-04 213408](https://user-images.githubusercontent.com/62875771/222914306-79398065-194b-4d3b-8977-3c8140c9bf9d.png)
 
 ## How to run application
 1. flutter clean
