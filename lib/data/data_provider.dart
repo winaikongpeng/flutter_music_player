@@ -24,13 +24,13 @@ class DataProvider {
           id: '2',
           isPlaying: false,
           audio: Audio(
-            pathAudio('Lauv - Modern Loneliness [Official Visualizer].mp3'),
+            pathAudio('sapientdream - Pastlives (lyrics).mp3'),
             metas: Metas(
               id: '2',
-              title: 'Modern Loneliness',
-              artist: 'Lauv',
-              album: 'The Extras',
-              image: MetasImage.asset(pathImage('lauv-image.png')),
+              title: 'Pastlives (lyrics)',
+              artist: 'sapientdream',
+              album: 'Holde Me',
+              image: MetasImage.asset(pathImage('pastlive-image.png')),
             ),
           ),
         ),
